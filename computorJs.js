@@ -65,4 +65,11 @@ if (system.args[1]) {
 	}
 
 }
-phantom.exit();
+
+exports.create = {
+	hello : function(){
+		return "hello";
+	}
+};
+
+// phantom.exit();
