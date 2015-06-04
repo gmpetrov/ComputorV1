@@ -1,4 +1,5 @@
 var system = require('system');
+// var casper = require('casper').create();
 
 // if (system.args.length === 1) {
 // 	console.log('Try to pass some args when invoking this script!');
