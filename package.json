@@ -1,0 +1,25 @@
+{
+  "name": "ComputorV1",
+  "version": "2.0.0",
+  "description": "School project named : ComputorV1",
+  "author": "gpetrov <gpetrov@student.42.fr>",
+  "contributors": [
+    {}
+  ],
+  "main": "computor.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gmpetrov/ComputorV1"
+  },
+  "bugs": {
+    "url": "https://github.com/gmpetrov/ComputorV1/issues"
+  },
+  "keywords": [
+    "test"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "pretty-error": "^1.1.2"
+  },
+  "license": "MIT"
+}
