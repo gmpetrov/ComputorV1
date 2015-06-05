@@ -1,6 +1,9 @@
-var cow = require('/computorJs').create;
+var regexp = require('./regexp').create;
+var errorHandler = require('./errorHandler').create;
 
-casper.test.begin("Hello, Test!", 1, function(test) {
-	test.assertEquals(cow.hello(), "hello");
+casper.test.begin("REGEXP TEST", 3, function(test) {
+	test.assert(regexp.isNum.test("123456"));
+	test.assert(regexp.isNum.test("-123456"));
+	test.assert(!regexp.isNum.test("123a56"));
 	test.done();
 });
