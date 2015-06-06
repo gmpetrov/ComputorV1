@@ -14,9 +14,11 @@ function main() {
 			equation.eq = eq.trim();
 			equation.lhs = regexp.getLhs.exec(eq)[1].trim();
 			equation.rhs = regexp.getRhs.exec(eq)[1].trim();
+			equation.lhsPolynomes = utils.getRegexpMatches(equation.lhs);
+			equation.rhsPolynomes = utils.getRegexpMatches(equation.rhs);
 
 			console.log('********************');
-			utils.dump(utils.getRegexpMatches(eq));
+			utils.rhsToLhs(equation.rhsPolynomes);
 
 			var matches = [],
 				match,
