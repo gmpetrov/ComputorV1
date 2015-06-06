@@ -10,10 +10,13 @@ var equation = {
 function main() {
 	if (args[2]) {
 		var eq = args[2];
-		if (/^(.*)=/.exec(eq)) {
+		if (regexp.isEquationValid.exec(eq)) {
 			equation.eq = eq.trim();
 			equation.lhs = regexp.getLhs.exec(eq)[1].trim();
 			equation.rhs = regexp.getRhs.exec(eq)[1].trim();
+
+			console.log('********************');
+			utils.dump(utils.getRegexpMatches(eq));
 
 			var matches = [],
 				match,
