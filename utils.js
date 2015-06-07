@@ -57,16 +57,19 @@ exports.create = {
             });
         }
         var result = null;
-        for (i = 0; i <= MACRO.maxExposant; i++){
-            if (!result)
-                result = ar[i];
-            else{
-                if (ar[i] >= 0)
-                    result += (" + " + ar[i]);
-                else
-                    result += (" " + ar[i]);
+        for (i = MACRO.maxExposant; i >= 0; i--){
+            if (ar[i] != 0) { // IF ar[i] == 0 THEN IT MEANS THAT THE POLYNOME IS EQUAL TO 0, SO IT CAN BE SKIPPED
+                if (!result)
+                    result = ar[i] + " * X^" + i;
+                else {
+                    if (ar[i] >= 0)
+                        result += (" + " + ar[i] + " * X^" + i);
+                    else
+                        result += (" " + ar[i] + " * X^" + i);
+                }
             }
         }
-        return result;
+        result += " = 0";
+        return { 'toString' : result, 'coeffs' : ar };
     }
 };
