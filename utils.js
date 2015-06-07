@@ -3,6 +3,7 @@
  */
 
 var regexp  = require('./regexp').create;
+var MACRO  = require('./MACRO').create;
 
 exports.create = {
     dump : function(object){
@@ -19,7 +20,6 @@ exports.create = {
         return matches;
     },
     rhsToLhs : function(polynomes){
-        console.log('rhsToLhs');
         var rhs = null;
         polynomes.forEach(function(elem, index){
             regexp.getCoefficient.lastIndex=0
@@ -36,7 +36,37 @@ exports.create = {
         });
         return rhs;
     },
-    addPolynomesFromString : function(equation){
+    addPolynomesFromString : function(string){
+        var polynomes = this.getRegexpMatches(string);
 
+        polynomes.forEach(function(elem, index){
+            regexp.getExposants.lastIndex = 0;
+            regexp.getCoefficient.lastIndex = 0;
+            var exposant = parseInt(regexp.getExposants.exec(elem)[1]);
+            var coeff    = parseFloat(regexp.getCoefficient.exec(elem)[1]);
+            polynomes[index] = { 'coefficient' : coeff, 'exposant' : exposant };
+        });
+
+        var ar = [];
+        for (i = 0; i <= MACRO.maxExposant; i++){ar[i] = 0;}
+        for (i = 0; i <= MACRO.maxExposant; i++){
+            polynomes.forEach(function(elem, index){
+                if (elem.exposant === i){
+                    ar[i] += elem.coefficient;
+                }
+            });
+        }
+        var result = null;
+        for (i = 0; i <= MACRO.maxExposant; i++){
+            if (!result)
+                result = ar[i];
+            else{
+                if (ar[i] >= 0)
+                    result += (" + " + ar[i]);
+                else
+                    result += (" " + ar[i]);
+            }
+        }
+        return result;
     }
 };
