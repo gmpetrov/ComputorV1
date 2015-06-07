@@ -17,9 +17,6 @@ function main() {
 			equation.lhsPolynomes = utils.getRegexpMatches(equation.lhs);
 			equation.rhsPolynomes = utils.getRegexpMatches(equation.rhs);
 
-			console.log('********************');
-			utils.rhsToLhs(equation.rhsPolynomes);
-
 			var matches = [],
 				match,
 				degree = 0;
@@ -30,7 +27,10 @@ function main() {
 				matches.push(match[1]);
 			}
 			equation.degree = degree;
-			console.log("ALL IS OK");
+
+			equation.reduced = equation.lhs + " " + utils.rhsToLhs(equation.rhsPolynomes);
+			equation.polynomes = utils.getRegexpMatches(equation.reduced);
+
 		} else {
 			errorHandler.invalidEquation();
 		}

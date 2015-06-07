@@ -15,12 +15,15 @@ exports.create = {
         while (match = regexp.getPolynomes.exec(src)) {
             matches.push(match[1]);
         }
+        regexp.getPolynomes.lastIndex = 0;
         return matches;
     },
     rhsToLhs : function(polynomes){
         console.log('rhsToLhs');
         var rhs = null;
         polynomes.forEach(function(elem, index){
+            regexp.getCoefficient.lastIndex=0
+            regexp.getExposants.lastIndex=0
 
             var coeff = parseFloat(regexp.getCoefficient.exec(elem)[1]) * -1;
             var exposant = regexp.getExposants.exec(elem)[1];

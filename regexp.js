@@ -4,6 +4,6 @@ exports.create = {
 	getExposants: new RegExp('X\\^(\\S+)+', 'g'),
 	getLhs : new RegExp('^(.*)='),
 	getRhs : new RegExp('.*=(.*)$'),
-	getPolynomes : new RegExp('(\\d+(?:\\.\\d+)?\\s+?\\*\\s+?X\\^\\d+|\\d+)', 'g'),
-	getCoefficient : new RegExp('(\\d+)\\s+?\\*\\s+?X\\^\\d+')
+	getPolynomes : new RegExp('((?:-(?:\\s+)?)?\\d+(?:\\.\\d+)?\\s+?\\*\\s+?X\\^\\d+|(?:-(?:\\s+)?)?\\d+)', 'g'),
+	getCoefficient : new RegExp('(\\d+)(:?\\s+)?\\*(?:\\s+)?X\\^\\d+')
 };
