@@ -1,7 +1,8 @@
 var args 			= process.argv,
 	regexp 			= require('./regexp'),
 	errorHandler 	= require('./errorHandler'),
-	utils			= require('./myUtils');
+	utils			= require('./myUtils'),
+	chalk		 	= require('chalk');
 
 require('pretty-error').start();
 
@@ -32,6 +33,11 @@ function printSolution(reducedForm, degree,solution){
 		console.log(solution.x1);
 	}
 	else if (degree < 2){
+		console.log(chalk.green(
+			'I am a green line ' +
+			chalk.blue.underline.bold('with a blue substring') +
+			' that becomes green again!'
+		));
 		console.log("The solution is:");
 		console.log(solution.x);
 	}

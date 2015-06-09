@@ -51,8 +51,12 @@ casper.test.begin("REGEXP TEST", 13, function(test) {
 	test.done();
 });
 
-casper.test.begin("PROCESSING TEST", 2, function(test){
+casper.test.begin("PROCESSING TEST", 3, function(test){
     test.assertEquals(main("5 * X^0 + 4 * X^1 = 4 * X^0"), { 'x' : -0.25, 'degree' : 1 });
+    test.assertEquals(main("5 * X^0 + 4 * X^1 = 4 * X^0"), { 'x' : -0.25, 'degree' : 1 });
+    console.log('****************');
+    utils.dump(main("5 * X^1 = 2"));
+    console.log('****************');
     test.assertEquals(main("5 * X^1 = 2"), { 'x' : 0.4, 'degree' : 1 });
     test.done();
 });
