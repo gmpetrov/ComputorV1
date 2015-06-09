@@ -1,7 +1,7 @@
 var args 			= process.argv,
-	regexp 			= require('./regexp').create,
-	errorHandler 	= require('./errorHandler').create,
-	utils			= require('./utils').create;
+	regexp 			= require('./regexp'),
+	errorHandler 	= require('./errorHandler'),
+	utils			= require('./myUtils');
 
 require('pretty-error').start();
 
@@ -33,42 +33,6 @@ function printSolution(reducedForm, degree, solution){
 	}
 }
 
-function findSolution(coeffs){
-	var degree = coeffs.length - 1;
-	if (degree == 2){ // CASE OF DEGREE 2 EQUATION
-		//∆ = b2 - 4ac
-		var a = coeffs[2];
-		var b = coeffs[1];
-		var c = coeffs[0];
-		var delta = (b * b) - (4 * a * c);
-		if (delta > 0){
-			var x1 = (-1 * (b) - Math.sqrt(delta)) / (2 * a);
-			var x2 = (-1 * (b) + Math.sqrt(delta)) / (2 * a);
-			return {'delta' : delta, 'x1' : x1, 'x2' : x2};
-		}
-		else if (delta === 0){
-			var x = (-1 * b) / (2 * a);
-			return {'delta' : delta, 'x' : x};
-		}
-		else if (delta < 0){
-			var x1 = (-1 * b) + " - " + delta + "i / " + 2 * a;
-			var x2 = (-1 * b) + " + " + delta + "i / " + 2 * a;
-			return {'delta' : delta, 'x1' : x1, 'x2' : x2};
-		}
-	}
-	else if (degree < 2){
-		if (degree == 1){
-			var a = coeffs[1];
-			var b = coeffs[0];
-			var x = (-1 * b) / a;
-			return {'x' : x};
-		}
-		return {'x' : coeffs[0]}
-	}
-
-
-}
-
 function main() {
 	if (args[2]) {
 		var eq = args[2];
@@ -91,7 +55,7 @@ function main() {
 			equation.degree = degree;
 			equation.reduced = equation.lhs + " " + utils.rhsToLhs(equation.rhsPolynomes);
 			equation.reduced = utils.addPolynomesFromString(equation.reduced, degree);
-			var solution = findSolution(equation.reduced.coeffs);
+			var solution = utils.findSolution(equation.reduced.coeffs);
 			printSolution(equation.reduced.toString, degree, solution);
 
 		} else {

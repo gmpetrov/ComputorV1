@@ -1,3 +1,5 @@
-exports.create = {
-    maxExposant : 2
-};
+module.exports = (function(){
+    return {
+        maxExposant : 2
+    };
+})();
