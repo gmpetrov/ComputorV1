@@ -21,22 +21,31 @@ exports.create = {
     },
     rhsToLhs : function(polynomes){
         var rhs = null;
+        console.log(polynomes);
         polynomes.forEach(function(elem, index){
             regexp.getCoefficient.lastIndex=0
             regexp.getExposants.lastIndex=0
 
-            var coeff = parseFloat(regexp.getCoefficient.exec(elem)[1]) * -1;
-            var exposant = regexp.getExposants.exec(elem)[1];
+            if (regexp.isNum.test(elem))
+                var coeff = parseFloat(elem) * -1;
+            else
+                var coeff = parseFloat(regexp.getCoefficient.exec(elem)[1]) * -1;
+            if (regexp.isNum.test(elem))
+                var exposant = 0;
+            else
+                var exposant = regexp.getExposants.exec(elem)[1];
             var polynome = coeff + " * X^" + exposant;
             polynomes[index] = polynome;
             if (rhs == null)
                 rhs = polynome;
             else
                 rhs = rhs + " " + polynome;
+
+            console.log(polynomes);
         });
         return rhs;
     },
-    addPolynomesFromString : function(string){
+    addPolynomesFromString : function(string, degree){
         var polynomes = this.getRegexpMatches(string);
 
         polynomes.forEach(function(elem, index){
@@ -48,8 +57,8 @@ exports.create = {
         });
 
         var ar = [];
-        for (i = 0; i <= MACRO.maxExposant; i++){ar[i] = 0;}
-        for (i = 0; i <= MACRO.maxExposant; i++){
+        for (i = 0; i <= degree; i++){ar[i] = 0;}
+        for (i = 0; i <= degree; i++){
             polynomes.forEach(function(elem, index){
                 if (elem.exposant === i){
                     ar[i] += elem.coefficient;
@@ -57,7 +66,7 @@ exports.create = {
             });
         }
         var result = null;
-        for (i = MACRO.maxExposant; i >= 0; i--){
+        for (i = degree; i >= 0; i--){
             if (ar[i] != 0) { // IF ar[i] == 0 THEN IT MEANS THAT THE POLYNOME IS EQUAL TO 0, SO IT CAN BE SKIPPED
                 if (!result)
                     result = ar[i] + " * X^" + i;

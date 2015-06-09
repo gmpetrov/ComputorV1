@@ -3,6 +3,8 @@ var args 			= process.argv,
 	errorHandler 	= require('./errorHandler').create,
 	utils			= require('./utils').create;
 
+require('pretty-error').start();
+
 var equation = {
 
 };
@@ -48,11 +50,12 @@ function findSolution(coeffs){
 			return {'delta' : delta, 'x' : x};
 		}
 		else if (delta < 0){
-			var x1 = (-1 * b) + " - " + Math.sqrt(delta) + "i / " + 2 * a;
-			var x2 = (-1 * b) + " + " + Math.sqrt(delta) + "i / " + 2 * a;
+			var x1 = (-1 * b) + " - " + delta + "i / " + 2 * a;
+			var x2 = (-1 * b) + " + " + delta + "i / " + 2 * a;
 			return {'delta' : delta, 'x1' : x1, 'x2' : x2};
 		}
 	}
+
 
 }
 
@@ -77,8 +80,7 @@ function main() {
 			}
 			equation.degree = degree;
 			equation.reduced = equation.lhs + " " + utils.rhsToLhs(equation.rhsPolynomes);
-			equation.reduced = utils.addPolynomesFromString(equation.reduced);
-			console.log(equation.reduced.toString);
+			equation.reduced = utils.addPolynomesFromString(equation.reduced, degree);
 			var solution = findSolution(equation.reduced.coeffs);
 			printSolution(equation.reduced.toString, degree, solution);
 
