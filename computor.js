@@ -29,9 +29,7 @@ function printSolution(reducedForm, degree, solution){
 	}
 	else if (degree < 2){
 		console.log("The solution is:");
-		if (degree == 0){
-			console.log(solution.x);
-		}
+		console.log(solution.x);
 	}
 }
 
@@ -58,7 +56,13 @@ function findSolution(coeffs){
 			return {'delta' : delta, 'x1' : x1, 'x2' : x2};
 		}
 	}
-	else if (degree == 0){
+	else if (degree < 2){
+		if (degree == 1){
+			var a = coeffs[1];
+			var b = coeffs[0];
+			var x = (-1 * b) / a;
+			return {'x' : x};
+		}
 		return {'x' : coeffs[0]}
 	}
 
