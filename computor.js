@@ -9,7 +9,11 @@ var equation = {
 
 };
 
-function printSolution(reducedForm, degree, solution){
+function printSolution(reducedForm, degree,solution){
+
+	if (solution.degree)
+		degree = solution.degree;
+
 	console.log("Reduced form: " + reducedForm);
 	console.log("Polynomial degree: " + degree);
 

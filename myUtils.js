@@ -22,7 +22,6 @@ module.exports = (function(){
         },
         rhsToLhs : function(polynomes){
             var rhs = null;
-            console.log(polynomes);
             polynomes.forEach(function(elem, index){
                 regexp.getCoefficient.lastIndex=0
                 regexp.getExposants.lastIndex=0
@@ -41,8 +40,6 @@ module.exports = (function(){
                     rhs = polynome;
                 else
                     rhs = rhs + " " + polynome;
-
-                console.log(polynomes);
             });
             return rhs;
         },
@@ -84,6 +81,10 @@ module.exports = (function(){
         },
         findSolution : function(coeffs){
             var degree = coeffs.length - 1;
+
+            if (degree == 2 && coeffs[2] == 0)
+                degree -= 1;
+
             if (degree == 2){ // CASE OF DEGREE 2 EQUATION
                 //∆ = b2 - 4ac
                 var a = coeffs[2];
@@ -110,7 +111,7 @@ module.exports = (function(){
                     var a = coeffs[1];
                     var b = coeffs[0];
                     var x = (-1 * b) / a;
-                    return {'x' : x};
+                    return {'x' : x, 'degree' : 1};
                 }
                 return {'x' : coeffs[0]}
             }
